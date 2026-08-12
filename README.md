@@ -20,13 +20,19 @@ Expo Orbit is the primary test path. The repository includes `expo-dev-client` a
 
 ### First simulator build
 
-Prerequisites: Xcode with an iOS Simulator, [Expo Orbit](https://docs.expo.dev/build/orbit/), and an Expo account.
+Prerequisites: Xcode with an iOS Simulator, [Expo Orbit](https://docs.expo.dev/build/orbit/), and access to the linked Expo project.
 
 ```sh
 npm install
-npx eas-cli@latest login
-npx eas-cli@latest init
+npm install --global eas-cli
+eas login
 npm run build:ios:simulator
+```
+
+The repository is already linked to EAS project `5b13a179-102e-4349-b873-20260148c78b`; do not create a second EAS project. If the link ever needs to be restored, run:
+
+```sh
+eas init --id 5b13a179-102e-4349-b873-20260148c78b
 ```
 
 When the EAS build completes:
@@ -44,7 +50,7 @@ Open `myHN` in the simulator. The development client reconnects to the most rece
 
 ### Normal development loop
 
-You only need a new native build after changing native dependencies or app configuration. For TypeScript and styling changes, keep the installed Orbit build and run:
+You only need a new native build after changing native dependencies or `app.json`. For TypeScript and styling changes, keep the installed Orbit build and run:
 
 ```sh
 npm run start:dev-client
@@ -75,6 +81,7 @@ npx expo export --platform web
 - iOS bundle identifier: `com.tcballard.myhn`
 - Android package: `com.tcballard.myhn`
 - URL scheme: `myhn`
+- EAS project ID: `5b13a179-102e-4349-b873-20260148c78b`
 
 ## Data source
 
