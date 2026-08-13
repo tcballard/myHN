@@ -16,7 +16,10 @@ The initial build intentionally does not include authentication, voting, posting
 
 ## Test with Expo Orbit
 
-Expo Orbit is the primary test path. The repository includes `expo-dev-client` and EAS profiles for both an iOS Simulator build and an ad hoc physical-device build.
+Expo Orbit is the primary test path. There are two different simulator builds:
+
+- `preview-simulator` is a self-contained app. Use this to open myHN directly from Orbit and test it without Metro.
+- `development-simulator` is a development client. Use this only while coding; it needs a Metro development server.
 
 ### First simulator build
 
@@ -40,21 +43,23 @@ When the EAS build completes:
 1. Open the build on the EAS dashboard.
 2. Select **Open with Expo Orbit**.
 3. Choose the iOS Simulator in Orbit.
-4. In the project directory, start Metro:
-
-```sh
-npm run start:dev-client
-```
-
-Open `myHN` in the simulator. The development client reconnects to the most recently used development server when it can reach it.
+4. Open `myHN` in the simulator. The feed is bundled into this build and starts without a terminal or Metro server.
 
 ### Normal development loop
 
-You only need a new native build after changing native dependencies or `app.json`. For TypeScript and styling changes, keep the installed Orbit build and run:
+For live development, first install the development-client build:
+
+```sh
+npm run build:ios:simulator:dev
+```
+
+Open that build with Orbit. Then keep Metro running while using the app:
 
 ```sh
 npm run start:dev-client
 ```
+
+Press `i` in the Expo terminal to open the project in the iOS Simulator. The development client can also reconnect to a detected local server from its launcher screen. You only need another development-client build after changing native dependencies or native `app.json` configuration.
 
 ### Physical iPhone
 
